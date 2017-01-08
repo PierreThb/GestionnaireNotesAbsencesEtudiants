@@ -25,36 +25,6 @@
 <title>Home</title>
 </head>
 <body>
-	<%-- Element d'action : jsp:include --%>
-	<jsp:include page="commun\entetedepage.jsp" />
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th>Nom</th>
-				<th>Prénom</th>
-				<th>Absences</th>
-			</tr>
-		</thead>
-		<tbody>
-			<%
-				for (Etudiant etudiant : GestionFactory.getEtudiants()) {
-					System.out.print("Etudiant : " + etudiant.getPrenom() + " " + etudiant.getNom());
-					System.out.println(" -> nombre d'absences : " + GestionFactory.getAbsencesByEtudiantId(etudiant.getId()));
-			%>
-			<tr>
-				<td><a href="/Project_LP/details.jsp?id=<%=etudiant.getId()%>"><%=etudiant.getPrenom()%></a></td>
-				<td><%=etudiant.getNom()%></td>
-				<td><%=GestionFactory.getAbsencesByEtudiantId(etudiant.getId())%></td>
-			</tr>
-			<%
-				}
-			%>
-		</tbody>
-
-	</table>
-	<br>
-
-	<%-- Element d'action : jsp:include --%>
-	<jsp:include page="commun\pieddepage.jsp" />
+	<% response.sendRedirect("do/home"); %>
 </body>
 </html>

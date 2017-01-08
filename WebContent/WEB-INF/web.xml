@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>JeuMVC</display-name>
+
+	<!-- Titre de l'application -->
+	<context-param>
+		<param-name>title</param-name>
+		<param-value>GestionnaireNotesAbsences</param-value>
+	</context-param>
+	
+	<!-- URLs communes aux vues -->
+	<context-param>
+		<param-name>entetedepage</param-name>
+		<param-value>/WEB-INF/JSP/commun/entetedepage.jsp</param-value>
+	</context-param>
+	<context-param>
+		<param-name>pieddepage</param-name>
+		<param-value>/WEB-INF/JSP/commun/pieddepage.jsp</param-value>
+	</context-param>
+
+
+	<!--========= Jeu (v3) =========== -->
+	<!-- Servlet controleur -->
+	<servlet>
+		<servlet-name>ServletTraitementDetails</servlet-name>
+		<servlet-class>projet.controleur.ServletTraitementDetails</servlet-class>
+		<init-param>
+			<param-name>urlHome</param-name>
+			<param-value>/WEB-INF/JSP/home.jsp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>urlDetail</param-name>
+			<param-value>/WEB-INF/JSP/details.jsp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>urlEditionNotes</param-name>
+			<param-value>/WEB-INF/JSP/editionNotes.jsp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>urlEditionAbsences</param-name>
+			<param-value>/WEB-INF/JSP/editionAbscences.jsp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>urlGroupes</param-name>
+			<param-value>/WEB-INF/JSP/groupes.jsp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>urlAbsencesSauvegarde</param-name>
+			<param-value>/WEB-INF/JSP/absencesSauvegarde.jsp</param-value>
+		</init-param>
+	</servlet>
+
+	<!-- Mapping URL/Servlet -->
+	<servlet-mapping>
+		<servlet-name>ServletTraitementDetails</servlet-name>
+		<url-pattern>/do/*</url-pattern>
+	</servlet-mapping>
+	
+	<!--  fichiers d'accueil -->
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>
