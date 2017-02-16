@@ -9,6 +9,7 @@
 
 <jsp:useBean id="idEtu" type="java.lang.Integer" scope="request"/>
 <jsp:useBean id="myEtu" class="projet.data.Etudiant" scope="request"/>
+<jsp:useBean id="moyenne" type="java.lang.Float" scope="request"/>
 
 <html>
 <head>
@@ -25,10 +26,14 @@
 	crossorigin="anonymous"></script>
 <title>Détail d'un étudiant</title>
 </head>
+<%-- Element d'action : jsp:include --%>
+	<jsp:include page="<%=getServletContext().getInitParameter(\"entetedepage\")%>" />
+	
 <body>
 	<p>Nom: <%=myEtu.getNom()%></p>
 	<p>Prénom: <%=myEtu.getPrenom()%></p>
 	<p>Absences: <%=myEtu.getNbAbsences()%></p>
+	<p>Moyenne: <%=moyenne%></p>
 	<br>
 	<%-- Element d'action : jsp:include --%>
 	<jsp:include page="<%=getServletContext().getInitParameter(\"pieddepage\")%>" />

@@ -13,11 +13,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
+<link rel="stylesheet" href="<%= getServletContext().getContextPath()%>/css/style.css">
 <!-- Latest compiled and minified JavaScript -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
@@ -27,17 +29,9 @@
 </head>
 <body>
 	<%-- Element d'action : jsp:include --%>
-	<jsp:include
-		page="<%=getServletContext().getInitParameter(\"entetedepage\")%>" />
-
-	<div class="btn-group" role="group" aria-label="...">
-		<a href="<%= getServletContext().getContextPath()%>/do/editionNotes"><button type="button" class="btn btn-default" >Editer Notes</button></a>
-		<a href="<%= getServletContext().getContextPath()%>/do/editionAbsences"><button type="button" class="btn btn-default" >Editer Absences</button></a>
-		<a href="<%= getServletContext().getContextPath()%>/do/voirGroupes"><button type="button" class="btn btn-default" >Voir Groupe</button></a>	
-	</div>
-	<br>
-	<br>
-
+	<jsp:include page="<%=getServletContext().getInitParameter(\"entetedepage\")%>" /> <%-- TODO INCLUDE AVEC PARAMETRE --%>
+	<jsp:include page="<%=getServletContext().getInitParameter(\"secondeEntete\")%>"/>
+	
 	<%-- Affichage des étudiants --%>
 	<table class="table table-hover">
 		<thead>

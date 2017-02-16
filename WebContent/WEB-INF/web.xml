@@ -17,6 +17,10 @@
 		<param-value>/WEB-INF/JSP/commun/entetedepage.jsp</param-value>
 	</context-param>
 	<context-param>
+		<param-name>secondeEntete</param-name>
+		<param-value>/WEB-INF/JSP/commun/secondeEntete.jsp</param-value>
+	</context-param>
+	<context-param>
 		<param-name>pieddepage</param-name>
 		<param-value>/WEB-INF/JSP/commun/pieddepage.jsp</param-value>
 	</context-param>

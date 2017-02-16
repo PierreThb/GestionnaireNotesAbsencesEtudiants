@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -20,6 +21,9 @@ public class Matière implements Serializable{
 	
 	@Column(unique=true,nullable=false)
 	private String nom;
+	
+	@ManyToMany(mappedBy="matières",fetch=FetchType.LAZY)
+	private List<Groupe> groupes;
 	
 	@ManyToMany(mappedBy="matières",fetch=FetchType.LAZY)	// LAZY = fetch when needed, EAGER = fetch immediately
 	private List<Etudiant> etudiants; //tous les étudiants de cette matière
@@ -56,5 +60,25 @@ public class Matière implements Serializable{
 
 	public void setEtudiants(List<Etudiant> etudiants) {
 		this.etudiants = etudiants;
+	}
+
+	public List<Note> getNotes() {
+		return notes;
+	}
+
+	public void setNotes(List<Note> notes) {
+		this.notes = notes;
+	}
+
+	public List<Groupe> getGroupes() {
+		return groupes;
+	}
+
+	public void setGroupes(List<Groupe> groupes) {
+		this.groupes = groupes;
+	}
+	
+	public void addGroupe(Groupe groupe){
+		this.groupes.add(groupe);
 	}
 }

@@ -25,10 +25,45 @@ public class MatièreDAO {
 				
 		// Recherche 
 		Query q = em.createQuery("SELECT m FROM Matière m");
-
 		@SuppressWarnings("unchecked")
 		List<Matière> listMatière = q.getResultList();
 		
 		return listMatière;
+	}
+	
+	public static List<Matière> getAllByGroupe(Groupe groupe){
+		EntityManager em = GestionFactory.factory.createEntityManager();
+		Query q = em.createQuery("SELECT m FROM Matière m WHERE m.groupe =:groupe");
+		q.setParameter("groupe", groupe);
+		@SuppressWarnings("unchecked")
+		List<Matière> matières = q.getResultList();
+		return matières;
+	}
+	
+	public static Matière update(Matière matière){
+		// Creation de l'entity manager
+		EntityManager em = GestionFactory.factory.createEntityManager();
+		
+		//
+		em.getTransaction().begin();
+
+		// Attacher une entitÃ© persistante (etudiant) Ã  lâ€™EntityManager courant
+		em.merge(matière);
+		
+		// Commit
+		em.getTransaction().commit();
+
+		// Close the entity manager
+		em.close();
+		
+		return matière;
+	}
+	
+	public static Matière getByNom(String nomMatiere){
+		EntityManager em = GestionFactory.factory.createEntityManager();
+		Query query = em.createQuery("SELECT m FROM Matière m WHERE m.nom =:nom");
+		query.setParameter("nom", nomMatiere);
+		Matière matière = (Matière)query.getSingleResult();
+		return matière;
 	}
 }

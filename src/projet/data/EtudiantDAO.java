@@ -180,4 +180,13 @@ public class EtudiantDAO {
 		return listEtudiant;
 	}
 	
+	public static List<Etudiant> getAllByGroupe(Groupe groupe){
+		EntityManager em = GestionFactory.factory.createEntityManager();
+		Query q = em.createQuery("SELECT e FROM Etudiant e WHERE e.groupe =:groupe");
+		q.setParameter("groupe", groupe);
+		@SuppressWarnings("unchecked")
+		List<Etudiant> etudiants = q.getResultList();
+		return etudiants;
+	}
+	
 }

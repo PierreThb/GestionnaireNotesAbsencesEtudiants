@@ -1,6 +1,9 @@
 package projet.data;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 public class NoteDAO {
 	
@@ -26,7 +29,7 @@ public class NoteDAO {
 		return note;
 	}
 	
-public static Note update(Note note) {
+	public static Note update(Note note) {
 		
 		// Creation de l'entity manager
 		EntityManager em = GestionFactory.factory.createEntityManager();
@@ -37,5 +40,22 @@ public static Note update(Note note) {
 		em.close();
 		
 		return note;
+	}
+	
+	public static Note getNoteByEtudiantMatière(Etudiant etudiant, Matière matière){
+		EntityManager em = GestionFactory.factory.createEntityManager();
+		Query q = em.createQuery("SELECT n FROM Note n WHERE n.etudiant=:etudiant AND n.matière=:matière");
+		q.setParameter("etudiant", etudiant);
+		q.setParameter("matière", matière);
+		Note note = (Note) q.getSingleResult();
+		return note;
+	}
+	
+	public static List<Note> getNotesForOneEtudiant(Etudiant etudiant){
+		EntityManager em = GestionFactory.factory.createEntityManager();
+		Query q = em.createQuery("SELECT n FROM Note n WHERE n.etudiant=:etudiant");
+		q.setParameter("etudiant", etudiant);
+		List<Note> notes = q.getResultList();
+		return notes;
 	}
 }

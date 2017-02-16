@@ -80,6 +80,10 @@ public class Etudiant implements Serializable{
 	public void setMatières(List<Matière> matières) {
 		this.matières = matières;
 	}
+	
+	public void addMatièreToList(Matière matière){
+		this.matières.add(matière);
+	}
 
 	public int getNbAbsences() {
 		return nbAbsences;

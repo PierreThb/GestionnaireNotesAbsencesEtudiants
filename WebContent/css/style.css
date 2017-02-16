@@ -1,3 +1,27 @@
 #tableAbsences{
 	width: 50%; !important	
 }
+
+#myp{
+	margin-top: 10px
+}
+
+#listeEntete{
+	list-style-type: none;
+	padding-bottom: 15px
+}
+
+ul li a{
+	display:block;
+ 	float:left;   
+ 	padding-right: 5px
+}
+
+#indications{
+	padding-bottom: 10px;
+	font-style: italic;
+}
+
+input {
+	margin-left: 10px;
+}

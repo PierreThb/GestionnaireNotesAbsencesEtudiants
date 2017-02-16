@@ -41,4 +41,32 @@ public class GroupeDAO {
 		
 		return listGroupe;
 	}
+	
+	public static Groupe update(Groupe groupe) {
+		
+		// Creation de l'entity manager
+		EntityManager em = GestionFactory.factory.createEntityManager();
+		
+		//
+		em.getTransaction().begin();
+
+		// Attacher une entité persistante (etudiant) à l’EntityManager courant
+		em.merge(groupe);
+		
+		// Commit
+		em.getTransaction().commit();
+
+		// Close the entity manager
+		em.close();
+		
+		return groupe;
+	}
+
+	public static Groupe getGroupeByName(String groupName){
+		EntityManager em = GestionFactory.factory.createEntityManager();
+		Query q = em.createQuery("SELECT g FROM Groupe g WHERE g.nom=:groupe");
+		q.setParameter("groupe", groupName);
+		Groupe groupe = (Groupe)q.getSingleResult();
+		return groupe;
+	}
 }

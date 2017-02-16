@@ -5,12 +5,14 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<jsp:useBean id="listEtu" type="java.util.Collection<Etudiant>" scope="request"/>
+<jsp:useBean id="etudiants" type="java.util.Collection<Etudiant>" scope="request"/>
+<jsp:useBean id="actualGroupeName" type="java.lang.String" scope="request"/>
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Edition Absences</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -25,14 +27,14 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
+<%-- Element d'action : jsp:include --%>
+<jsp:include page="<%=getServletContext().getInitParameter(\"entetedepage\")%>" />
+<jsp:include page="<%=getServletContext().getInitParameter(\"secondeEntete\")%>"/>
+		
+<p id="indications">* Pour supprimer des absences, utilisez le signe "-". (ex: -2 supprimera 2 abscences à l'étudiant). Le nombre d'absence minimal sera 0.</p>
 
-<div class="btn-group" role="group" aria-label="...">
-	<a href="<%= getServletContext().getContextPath()%>/do/voirHome"><button type="button" class="btn btn-default" >Voir Etudiants</button></a>
-	<a href="<%= getServletContext().getContextPath()%>/do/voirGroupes"><button type="button" class="btn btn-default" >Voir Groupe</button></a>	
-</div>
-	
 <%-- Affichage des étudiants --%>
-<form action="<%= getServletContext().getContextPath()%>/do/urlAbsencesSauvegarde" method="post" class="form-inline">
+<form action="<%= getServletContext().getContextPath()%>/do/updateAbsences?groupe=<%=actualGroupeName%>" method="post" class="form-inline">
 	<table id="tableAbsences" class="table table-hover">
 		<thead>
 			<tr>
@@ -45,17 +47,16 @@
 			<%
 			int i = 1;
 			String string = "";
-		for (Iterator<Etudiant> etuIt = listEtu.iterator(); etuIt.hasNext();) {
-				Etudiant etudiant = etuIt.next();
+			for (Etudiant etudiant : etudiants) {
 				string = "inputAbs"+Integer.toString(i);
-			%>
-			<tr>
-				<td><a href="<%= getServletContext().getContextPath()%>/do/detail?id=<%=etudiant.getId()%>"><%=etudiant.getPrenom()%></a></td>
-				<td><%=etudiant.getNom()%></td>
-				<td><%=etudiant.getNbAbsences()%> <input id="<%=string%>" name="<%=string%>" class="form-control" type="number" placeholder="Absence(s)"></td> 
-			</tr>
-			<%
-			i++;
+				%>
+				<tr>
+					<td><a href="<%= getServletContext().getContextPath()%>/do/detail?id=<%=etudiant.getId()%>"><%=etudiant.getPrenom()%></a></td>
+					<td><%=etudiant.getNom()%></td>
+					<td><%=etudiant.getNbAbsences()%> <input id="<%=string%>" name="<%=string%>" class="form-control" type="number" placeholder="Absence(s)"></td> 
+				</tr>
+				<%
+				i++;
 			}
 			%> 
 		</tbody>
